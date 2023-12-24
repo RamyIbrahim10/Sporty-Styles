@@ -1,0 +1,36 @@
+body {
+    background: #F2F2F2;
+    color: #282828;
+}
+.navbar {
+    background-color: #282828;
+    color: #FFCF01;
+}
+#nav .navbar-brand,
+#nav .offcanvas-title,
+#nav .navbar-nav .nav-link {
+   color: #FFCF01;
+}
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFCF01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M1 4h14M1 8h14M1 12h14'/%3E%3C/svg%3E");
+  }
+#Welcome {
+    padding-top: 180px;
+    text-align: center;
+    color: #282828;
+    font-weight: bolder;
+}
+.btn {
+  width: 180px;
+  height: 40px;
+  background-color: #FFCF01;
+  color: #282828;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #FEB70C;
+}
