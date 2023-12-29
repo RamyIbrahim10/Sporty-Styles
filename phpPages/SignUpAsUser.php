@@ -27,7 +27,7 @@ if (isset($_POST["submit"])) {
     // Insert user details into the database
     $sql = "INSERT INTO signupasuser (fullName, email, Password, DateofBirth, Gender) VALUES ('$username', '$email', '$password', '$dob', '$gender')";
     if ($conn->query($sql) === true) {
-        echo "Sign-up successful!";
+        header("Location: ../ShoppingCenterManagement/fork.html");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
