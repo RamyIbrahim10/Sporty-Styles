@@ -2,85 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="index.css">
-    <title>Sporty Styles</title>
-    <style>
-        body {
-            background: #F2F2F2;
-            color: #282828;
-        }
-
-        .navbar {
-            background-color: #282828;
-            color: #FFCF01;
-        }
-
-        #nav .navbar-brand,
-        #nav .offcanvas-title,
-        #nav .navbar-nav .nav-link {
-            color: #FFCF01;
-        }
-
-        .custom-toggler .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFCF01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M1 4h14M1 8h14M1 12h14'/%3E%3C/svg%3E");
-        }
-
-        .container-500 {
-            max-width: 500px;
-        }
-    </style>
+    <!-- Your existing head content -->
 </head>
 
 <body class=" ">
-    <nav id="nav" class="navbar navbar-expand-lg">
-        <div class="container">
+    <!-- Your existing navigation and form content -->
 
-            <!-- Logo -->
-
-            <a id="MainLogo" class="navbar-brand fs-4" href="../index.html">Sporty Styles</a>
-
-            <!-- Toggle Btn -->
-
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- SideBar -->
-
-            <div class="sidebar offcanvas offcanvas-end" id="offcanvasNavbar">
-                <div class="offcanvas-header" style="background-color: #282828;">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Sporty Styles</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3"
-                        style="font-size: 20px; color: #141414; font-weight: bold;">
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="../index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="FAQ.html">FAQ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
     <div class="container mt-5 mb-5 p-3 rounded container-500" style="background-color: #282828; color:#FFCF01;">
         <div class="row ">
             <div class="">
-                <form method="POST" action="../phpPages/SignUpAsUser.php" >
+                <form method="post" action="page.php">
                     <!-- Full Name input -->
                     <div class="mb-3">
                         <label class="form-label" for="fullName">Full Name</label>
@@ -89,14 +20,14 @@
 
                     <!-- Email input -->
                     <div class="mb-3">
-                        <label class="form-label" for="email">Email address</label>
-                        <input type="email" id="email" class="form-control" name="email" required />
+                        <label class="form-label" for="email1">Email address</label>
+                        <input type="email" id="email1" class="form-control" name="email1" required />
                     </div>
 
                     <!-- Password input -->
                     <div class="mb-3">
-                        <label class="form-label" for="Password">Password</label>
-                        <input type="password" id="password" class="form-control" name="Password" required />
+                        <label class="form-label" for="pass">Password</label>
+                        <input type="password" id="pass" class="form-control" name="pass" required />
                     </div>
 
                     <!-- Confirm Password input -->
@@ -107,14 +38,14 @@
 
                     <!-- Date of Birth input -->
                     <div class="mb-3">
-                        <label class="form-label" for="DateofBirth">Date of Birth</label>
-                        <input type="date" id="dob" class="form-control" name="DateofBirth" required />
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <input type="date" id="dob" class="form-control" name="dob" required />
                     </div>
 
                     <!-- Gender input -->
                     <div class="mb-3">
-                        <label class="form-label" for="Gender">Gender</label>
-                        <select id="gender" class="form-select" name="Gender" required>
+                        <label class="form-label" for="gender">Gender</label>
+                        <select id="gender" class="form-select" name="gender" required>
                             <option value="" disabled selected>Select your gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -124,7 +55,7 @@
 
                     <!-- Submit button -->
                     <div class="m-5 text-center">
-                        <input type="submit" value="Sign Up" class="btn btn-primary btn-block">
+                        <input type="submit" name="submit" value="Sign Up" class="btn btn-primary btn-block">
                     </div>
 
                     <!-- Additional Information or Terms -->
