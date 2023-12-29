@@ -7,12 +7,6 @@ $dbname = "stylesports";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "Connected Successfully";
-}
 
 // Function to safely escape input values
 function clean_input($value)
