@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // User found
         $row = $result->fetch_assoc();
         // Verify the entered password with the hashed password in the database
-        if (password_verify($password, $row['Password'])) {
+        if ($password === $row['Password']) {
             // Password is correct, login successful
             $_SESSION['email'] = $username; // Store username in session for further use
             echo "Login successful!";
