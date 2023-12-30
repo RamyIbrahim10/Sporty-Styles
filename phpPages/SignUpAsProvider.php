@@ -31,6 +31,9 @@ function clean_input($value)
 // Handle form submission
 if (isset($_POST["submit"])) {
     // Fetch user input
+
+    echo 'welcome';
+
     $username = clean_input($_POST["fullName"]);
     $email = clean_input($_POST["email1"]);
     $password = clean_input($_POST["pass"]);
