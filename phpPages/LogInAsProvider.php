@@ -29,8 +29,17 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['Password'];
+
+    if(isset($_POST['username'])) {
+        $username = $_POST['username'];
+        // rest of your code using $username
+    } else {
+        // Handle the case where 'username' is not set in $_POST
+        $username = $_POST['username'];
+        $password = $_POST['Password'];
+    }
+
+
 
     // SQL query to retrieve user from the database
     $sql = "SELECT * FROM signupasprovider WHERE email = '$username'";
