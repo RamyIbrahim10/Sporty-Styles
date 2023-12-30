@@ -48,11 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Invalid password
             echo "<script>alert('Invalid Password');</script>";
+            echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>";
             exit();
         }
     } else {
         // User not found
-        echo "User not found";
+        echo "<script>alert('User not found');</script>";
+        echo "<script>window.location.href = 'login.php';</script>"; // Redirect back to login page with error message
     }
 }
 
