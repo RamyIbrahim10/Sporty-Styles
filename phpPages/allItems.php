@@ -66,41 +66,49 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h2>View All Items</h2>
-        <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>Section</th>
-                    <th>Production Date</th>
-                    <th>Expiration Date</th>
-                    <th>Manufacturing Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Example data, replace with your actual data -->
-                <tr>
-                    <td>$20.99</td>
-                    <td>10%</td>
-                    <td>Electronics</td>
-                    <td>2023-01-01</td>
-                    <td>2023-12-31</td>
-                    <td>Factory A</td>
-                </tr>
-                <tr>
-                    <td>$15.50</td>
-                    <td>5%</td>
-                    <td>Clothing</td>
-                    <td>2023-02-15</td>
-                    <td>2024-02-14</td>
-                    <td>Factory B</td>
-                </tr>
-                <!-- Add more rows as needed -->
-            </tbody>
-        </table>
-    </div>
+    <div class="container">
+        <h2>All Items</h2>
+        <div class="row">
+          <?php
+            // Replace with your database connection details
+            $servername = "localhost";
+            $username = "username";
+            $password = "password";
+            $dbname = "your_database";
+      
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+      
+            // Check connection
+            if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+            }
+      
+            // Fetch items from the database
+            $sql = "SELECT * FROM items";
+            $result = $conn->query($sql);
+      
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                // Display each item
+                echo '<div class="col-md-4 mb-3">';
+                echo '<div class="card">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">' . $row['item_name'] . '</h5>';
+                echo '<p class="card-text">Description: ' . $row['description'] . '</p>';
+                echo '<p class="card-text">Price: $' . $row['price'] . '</p>';
+                // Add more fields as needed
+                echo '</div></div></div>';
+              }
+            } else {
+              echo "No items found";
+            }
+      
+            // Close connection
+            $conn->close();
+          ?>
+        </div>
+      </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
