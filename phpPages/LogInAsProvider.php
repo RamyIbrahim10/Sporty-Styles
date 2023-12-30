@@ -53,8 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // User not found
-        echo "<script>alert('User not found');</script>";
-        echo "<script>window.location.href = '../htmlPages/fork.html';</script>"; // Redirect back to login page with error message
+
     }
 }
 
