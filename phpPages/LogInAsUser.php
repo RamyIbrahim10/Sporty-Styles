@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
 <?php
 session_start();
 
@@ -29,7 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $row['Password']) {
             // Password is correct, login successful
             $_SESSION['email'] = $username; // Store username in session for further use
-            echo "Login successful!";
+            echo '<div class="alert alert-success" role="alert">
+                    Login successful!
+                </div>';
             // Redirect to a new page or set session variables for logged-in user
         } else {
             // Invalid password
