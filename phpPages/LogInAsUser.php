@@ -48,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // Invalid password
             echo "<script>alert('Invalid Password');</script>";
-            echo "<script>window.location.href = 'LogInAsUser.php';</script>"; // Redirect back to login page with error message
             exit();
         }
     } else {
