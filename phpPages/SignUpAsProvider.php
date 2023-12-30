@@ -41,7 +41,7 @@ if (isset($_POST["submit"])) {
     $gender = clean_input($_POST["gender"]);
 
     // Insert user details into the database
-    $sql = "INSERT INTO signupasuser (fullName, email, Password, DateofBirth, Gender) VALUES ('$username', '$email', '$password', '$dob', '$gender')";
+    $sql = "INSERT INTO signupasprovider (fullName, email, Password, DateofBirth, Gender) VALUES ('$username', '$email', '$password', '$dob', '$gender')";
     if ($conn->query($sql) === true) {
         echo "<script>alert('Sign Up Successfully');</script>";
         echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect to a dashboard page
