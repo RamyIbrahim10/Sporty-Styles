@@ -41,7 +41,8 @@ if (isset($_POST["submit"])) {
     $sql = "INSERT INTO signupasuser (fullName, email, Password, DateofBirth, Gender) VALUES ('$username', '$email', '$password', '$dob', '$gender')";
     if ($conn->query($sql) === true) {
         echo "<script>alert('Sign Up Successfully');</script>";
-        header("Location: ../htmlPages/LoginUser.html");
+        echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect to a dashboard page
+        
     }
 
     $conn->close();
