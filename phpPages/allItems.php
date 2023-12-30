@@ -72,9 +72,9 @@
           <?php
             // Replace with your database connection details
             $servername = "localhost";
-            $username = "username";
-            $password = "password";
-            $dbname = "your_database";
+            $username = "root";
+            $password = "";
+            $dbname = "items";
       
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
