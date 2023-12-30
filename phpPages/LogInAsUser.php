@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, login successful
             $_SESSION['email'] = $username;
             echo "<script>alert('Login successful!');</script>";
-            echo "<script>window.location.href = '';</script>"; // Redirect to a dashboard page
+            echo "<script>window.location.href = '../htmlPages/fork.html';</script>"; // Redirect to a dashboard page
             exit();
         } else {
             // Invalid password
