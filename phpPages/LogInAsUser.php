@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, login successful
             $_SESSION['email'] = $username;
             echo "<script>alert('Login successful!');</script>";
-            echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect to a dashboard page
+            echo "<script>window.location.href = '';</script>"; // Redirect to a dashboard page
             exit();
         } else {
             // Invalid password
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // User not found
         echo "<script>alert('User not found');</script>";
-        echo "<script>window.location.href = 'login.php';</script>"; // Redirect back to login page with error message
+        echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect back to login page with error message
     }
 }
 
