@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirect to a new page or set session variables for logged-in user
         } else {
             // Invalid password
-            echo "Invalid password";
+            echo "Invalid Password";
         }
     } else {
         // User not found
