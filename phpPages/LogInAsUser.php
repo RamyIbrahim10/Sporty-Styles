@@ -39,17 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         // User found
         $row = $result->fetch_assoc();
-        // Verify the entered password with the hashed password in the database
         if ($password === $row['Password']) {
             // Password is correct, login successful
-            $_SESSION['email'] = $username; // Store username in session for further use
-            echo '<div class="alert alert-success" role="alert">
-                    Login successful!
-                </div>';
-            // Redirect to a new page or set session variables for logged-in user
+            $_SESSION['email'] = $username;
+            echo "<script>alert('Login successful!');</script>";
+            echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect to a dashboard page
+            exit();
         } else {
             // Invalid password
-            echo "Invalid Password";
+            echo "<script>alert('Invalid Password');</script>";
+            echo "<script>window.location.href = 'login.php';</script>"; // Redirect back to login page with error message
+            exit();
         }
     } else {
         // User not found
