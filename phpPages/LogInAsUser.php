@@ -19,16 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // SQL query to retrieve user from the database
-    $sql = "SELECT * FROM users WHERE username = '$username'";
+    $sql = "SELECT * FROM signupasuser WHERE username = '$username'";
     $result = $conn->query($sql);
-
-    // Prepare and bind the query
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    
-    // Get result
-    $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
         // User found
@@ -47,8 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // User not found
         echo "User not found";
     }
-    
-    $stmt->close();
 }
 
 $conn->close();
