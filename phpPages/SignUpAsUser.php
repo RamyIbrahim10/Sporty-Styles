@@ -42,7 +42,6 @@ if (isset($_POST["submit"])) {
     if ($conn->query($sql) === true) {
         echo "<script>alert('Sign Up Successfully');</script>";
         echo "<script>window.location.href = '../htmlPages/LoginUser.html';</script>"; // Redirect to a dashboard page
-        
     }
 
     $conn->close();
