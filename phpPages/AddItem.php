@@ -47,8 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $itemImage = $targetFile;
 
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO items (image_path, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
 
+            if ($stmt) {
+                $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
+            
             if ($stmt) {
                 // Bind parameters to the prepared statement
                 $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
