@@ -1,43 +1,54 @@
 <?php
-// Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Establish connection to your MySQL database
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "stylesprots";
+    $dbname = "stylesports";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Retrieve form data
-    $itemName = $_POST['itemName'];
-    $itemPrice = $_POST['price'];
-    $productionDate = $_POST['productionDate'];
-    $manufacturingLocation = $_POST['manufacturingLocation'];
+    // Define variables and initialize them
+    $itemName = $itemPrice = $productionDate = $manufacturingLocation = $itemImage = "";
+
+    // Check if the form fields are set before accessing them
+    if(isset($_POST['itemName'])) {
+        $itemName = $_POST['itemName'];
+    }
+
+    if(isset($_POST['price'])) {
+        $itemPrice = $_POST['price'];
+    }
+
+    if(isset($_POST['productionDate'])) {
+        $productionDate = $_POST['productionDate'];
+    }
+
+    if(isset($_POST['manufacturingLocation'])) {
+        $manufacturingLocation = $_POST['manufacturingLocation'];
+    }
 
     // Handle file upload
-    $targetDir = "uploads/"; // Directory where uploaded images will be stored
+    $targetDir = "uploads/";
     $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
 
     if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
-        // File uploaded successfully, proceed to store data in the database
         $itemImage = $targetFile;
 
-        // SQL to insert data into the database
-        $sql = "INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location)
-                VALUES ('$itemImage', '$itemName', '$itemPrice', '$productionDate', '$manufacturingLocation')";
+        // Prepare and execute the SQL statement
+        $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($stmt->execute()) {
             echo "Data stored successfully!";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $stmt->error;
         }
+
+        $stmt->close();
     } else {
         echo "Error uploading file.";
     }
