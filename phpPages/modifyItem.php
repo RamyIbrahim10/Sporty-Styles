@@ -33,6 +33,7 @@
         }
         .card {
             background-color: #282828;
+            color: #FFCF01;
             width: 14rem; /* Adjust the card width as needed */
             margin-bottom: 20px;
             border: 1px solid #ccc; /* Add a border for separation */
@@ -65,7 +66,7 @@
 </head>
 
 <body>
-
+    <!-- Your Navbar -->
     <nav id="nav" class="navbar navbar-expand-lg">
         <div class="container">
             <a id="MainLogo" class="navbar-brand fs-4" href="../index.html">Sporty Styles</a>
@@ -95,57 +96,56 @@
             </div>
         </div>
     </nav><br><br><br>
-
+    <!-- Main Content Section -->
     <div class="container">
-    <div class="row">
-        <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "stylesports";
+        <div class="row">
+            <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "stylesports";
 
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
 
-        $sql = "SELECT * FROM items"; // Assuming 'items' is your table name
-        $result = $conn->query($sql);
+            $sql = "SELECT * FROM items"; // Assuming 'items' is your table name
+            $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            // Output data of each row
-            while ($row = $result->fetch_assoc()) {
-                ?>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="card">
-                        <img src="<?php echo $row['image_path']; ?>" class="card-img-top" alt="Item Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['Name']; ?></h5>
-                            <p class="card-text">Price: <?php echo $row['Price']; ?></p>
-                            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
-                            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
-                            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+            if ($result->num_rows > 0) {
+                // Output data of each row
+                while ($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card">
+                            <img src="<?php echo $row['image_path']; ?>" class="card-img-top" alt="Item Image">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $row['Name']; ?></h5>
+                                <p class="card-text">Price: <?php echo $row['Price']; ?></p>
+                                <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
+                                <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
+                                <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
+                    <?php
+                }
+            } else {
+                echo "No items found";
             }
-        } else {
-            echo "No items found";
-        }
 
-        $conn->close();
-        ?>
+            $conn->close();
+            ?>
+        </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>
