@@ -11,35 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Define variables and initialize them
-    $itemName = $itemPrice = $productionDate = $manufacturingLocation = $itemImage = "";
+    // Collect form data
+    $itemName = $_POST['Name'];
+    $price = $_POST['Price'];
+    $afterDiscount = $_POST['AfterDiscount'];
+    $productionDate = $_POST['PDate'];
+    $manufacturingLocation = $_POST['MadeIn'];
 
     
-    // Check if the form fields are set before accessing them
-    
-    if(isset($_POST['itemImage'])) {
-        $itemName = $_POST['itemImage'];
-    }
-    
-    if(isset($_POST['Name'])) {
-        $itemName = $_POST['Name'];
-    }
-
-    if(isset($_POST['Price'])) {
-        $itemPrice = $_POST['Price'];
-    }
-
-    if(isset($_POST['AfterDiscount'])) {
-        $productionDate = $_POST['AfterDiscount'];
-    }
-
-    if(isset($_POST['PDate'])) {
-        $productionDate = $_POST['PDate'];
-    }
-
-    if(isset($_POST['MadeIn'])) {
-        $manufacturingLocation = $_POST['MadeIn'];
-    }
     // Generate a unique filename
     $targetDir = "uploads/"; // Directory where images will be stored
     $timestamp = time(); // Get current timestamp
@@ -54,9 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
             // File uploaded successfully, save the file name or path to the database
             $imagePath = $targetFile;
-
-            // Insert image path into the database
-            $sql = "INSERT INTO items (image_path) VALUES ('$imagePath')";
+    
+            $sql = "INSERT INTO items ( image_path, item_name, price, after_discount, production_date, manufacturing_location) VALUES ('$imagePath', '$itemName', '$price', '$afterDiscount', '$productionDate', '$manufacturingLocation')";
             if ($conn->query($sql) === TRUE) {
                 echo "Image uploaded and saved in the database successfully.";
             } else {
