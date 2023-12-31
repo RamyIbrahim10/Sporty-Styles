@@ -16,23 +16,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if the form fields are set before accessing them
     if(isset($_POST['itemName'])) {
-        $itemName = $_POST['itemName'];
+        $itemName = $_POST['Name'];
     }
 
-    if(isset($_POST['price'])) {
-        $itemPrice = $_POST['price'];
+    if(isset($_POST['Price'])) {
+        $itemPrice = $_POST['Price'];
     }
 
-    if(isset($_POST['productionDate'])) {
-        $productionDate = $_POST['productionDate'];
+    if(isset($_POST['AfterDiscount'])) {
+        $productionDate = $_POST['AfterDiscount'];
     }
 
-    if(isset($_POST['manufacturingLocation'])) {
-        $manufacturingLocation = $_POST['manufacturingLocation'];
+    if(isset($_POST['PDate'])) {
+        $productionDate = $_POST['PDate'];
+    }
+
+    if(isset($_POST['MadeIn'])) {
+        $manufacturingLocation = $_POST['MadeIn'];
     }
 
     // Check if file input 'itemImage' exists in the form submission
-    if(isset($_FILES['itemImage']) && $_FILES['itemImage']['error'] === UPLOAD_ERR_OK) {
+    if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $targetDir = "uploads/";
 
         // Create the directory if it doesn't exist
@@ -40,10 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mkdir($targetDir, 0777, true);
         }
 
-        $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
+        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
         $absoluteTargetFile = __DIR__ . '/' . $targetFile; // Use absolute path
 
-        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $absoluteTargetFile)) {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $absoluteTargetFile)) {
             $itemImage = $targetFile;
 
             // Prepare the SQL statement
@@ -51,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt) {
                 // Bind parameters to the prepared statement
-                $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
+                $stmt->bind_param("ssssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
                 // Execute the statement
                 if ($stmt->execute()) {
