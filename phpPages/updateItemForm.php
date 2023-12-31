@@ -106,8 +106,8 @@
 
             <!-- Other input fields -->
             <div class="mb-3">
-                <label for="itemImage" class="form-label">Item Image</label>
-                <input type="file" class="form-control" id="itemImage" name="itemImage" accept="image/*">
+                <label for="image" class="form-label">Item Image</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
             </div>
 
             <div class="mb-3">
