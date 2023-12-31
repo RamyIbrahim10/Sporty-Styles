@@ -31,13 +31,16 @@
         .container-500 {
             max-width: 500px;
         }
-        <style>
         .card {
-            width: 18rem; /* Adjust the card width as needed */
+            width: 14rem; /* Adjust the card width as needed */
             margin-bottom: 20px;
-            border: 1px solid #ddd; /* Add a border for separation */
-            border-radius: 8px; /* Round the corners */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a subtle shadow */
+            border: 1px solid #ccc; /* Add a border for separation */
+            border-radius: 10px; /* Round the corners */
+            overflow: hidden; /* Hide any content that overflows */
+            transition: transform 0.3s ease; /* Add a smooth hover effect */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Move the card slightly on hover */
         }
         .card-body {
             padding: 1.25rem; /* Adjust the padding within the card body */
@@ -51,10 +54,12 @@
             color: #555; /* Set text color */
         }
         .card-img-top {
-            border-top-left-radius: 8px; /* Round top-left corner of the image */
-            border-top-right-radius: 8px; /* Round top-right corner of the image */
+            border-top-left-radius: 10px; /* Round top-left corner of the image */
+            border-top-right-radius: 10px; /* Round top-right corner of the image */
+            width: 100%; /* Make the image fill the entire width */
+            height: 180px; /* Adjust the image height */
+            object-fit: cover; /* Scale the image while preserving aspect ratio */
         }
-    </style>
     </style>
 </head>
 
@@ -119,9 +124,9 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['Name']; ?></h5>
                             <p class="card-text">Price: <?php echo $row['Price']; ?></p>
-                            <p class="card-text">Price with Discount: <?php echo $row['AfterDiscount']; ?></p>
-                            <p class="card-text">Production Date: <?php echo $row['PDate']; ?></p>
-                            <p class="card-text">Manufacturing Location: <?php echo $row['MadeIn']; ?></p>
+                            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
+                            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
+                            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
                         </div>
                     </div>
                 </div>
