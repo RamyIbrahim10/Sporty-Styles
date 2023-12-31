@@ -121,18 +121,19 @@
                 while ($row = $result->fetch_assoc()) {
                     ?>
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="card">
-                            <img src="<?php echo $row['image_path']; ?>" class="card-img-top" alt="Item Image">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $row['Name']; ?></h5>
-                                <p class="card-text">Price: <?php echo $row['Price']; ?></p>
-                                <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
-                                <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
-                                <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
-                                <a href=""><p style="text-align:center"><input class="btn btn-warning" type="button" value="Modify"></p></a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="card">
+        <img src="<?php echo $row['image_path']; ?>" class="card-img-top" alt="Item Image">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $row['Name']; ?></h5>
+            <p>ID: <?php echo $row['ID']; ?></p> <!-- Display the ID -->
+            <p class="card-text">Price: <?php echo $row['Price']; ?></p>
+            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
+            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
+            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+            <a href="../htmlPages/updateItemForm.html"><p style="text-align:center"><input class="btn btn-warning" type="button" value="Modify"></p></a>
+        </div>
+    </div>
+</div>
                     <?php
                 }
             } else {
