@@ -33,11 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if file input 'itemImage' exists in the form submission
     if(isset($_FILES['itemImage']) && $_FILES['itemImage']['error'] === UPLOAD_ERR_OK) {
-        // Handle file upload
         $targetDir = "uploads/";
-        $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
 
-        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
+        // Create the directory if it doesn't exist
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
+        $absoluteTargetFile = __DIR__ . '/' . $targetFile; // Use absolute path
+
+        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $absoluteTargetFile)) {
             $itemImage = $targetFile;
 
             // Prepare and execute the SQL statement
