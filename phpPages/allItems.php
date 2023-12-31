@@ -67,46 +67,48 @@
     </nav>
 
     <div class="container">
-        <h2>All Items</h2>
-        <div class="row">
-          <?php
-            // Replace with your database connection details
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "stylesports";
-      
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-      
-            // Check connection
-            if ($conn->connect_error) {
-              die("Connection failed: " . $conn->connect_error);
-            }
-      
-            // Fetch items from the database
-            $sql = "SELECT * FROM items";
-            $result = $conn->query($sql);
-      
-            if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
+    <h2>All Items</h2>
+    <div class="row">
+        <?php
+        // Replace with your database connection details
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "stylesports";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Fetch items from the database
+        $sql = "SELECT * FROM items";
+        $result = $conn->query($sql);
+
+        // Display items fetched from the database
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 // Display each item
                 echo '<div class="col-md-4 mb-3">';
                 echo '<div class="card">';
                 echo '<div class="card-body">';
-                echo '<h5 class="card-title">' . $row['item_name'] . '</h5>';
-                echo '<p class="card-text">Description: ' . $row['description'] . '</p>';
-                echo '<p class="card-text">Price: $' . $row['price'] . '</p>';
+                echo '<h5 class="card-title">' . $row['Name'] . '</h5>';
+                echo '<p class="card-text">Price: $' . $row['Price'] . '</p>';
                 // Add more fields as needed
                 echo '</div></div></div>';
-              }
-            } else {
-              echo "No items found";
             }
-      
-            // Close connection
-            $conn->close();
-          ?>
+        } else {
+            echo "No items found";
+        }
+
+        // Close connection
+        $conn->close();
+        ?>
+    </div>
+</div>
         </div>
       </div>
 
