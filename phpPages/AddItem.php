@@ -36,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
             $sql = "INSERT INTO items ( image_path, Name, price, AfterDiscount, PDate, MadeIn) VALUES ('$imagePath', '$itemName', '$price', '$afterDiscount', '$productionDate', '$manufacturingLocation')";
             if ($conn->query($sql) === TRUE) {
-                echo "Image uploaded and saved in the database successfully.";
+                echo "<script>alert('Image uploaded and saved in the database successfully.');</script>";
+                echo "<script>window.location.href = '../htmlPages/insertItem.html';</script>";
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
