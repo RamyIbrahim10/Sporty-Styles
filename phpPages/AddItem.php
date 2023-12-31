@@ -46,17 +46,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $absoluteTargetFile)) {
             $itemImage = $targetFile;
 
-            // Prepare and execute the SQL statement
+            // Prepare the SQL statement
             $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
-            if ($stmt->execute()) {
-                echo "Data stored successfully!";
+            if ($stmt) {
+                // Bind parameters to the prepared statement
+                $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
+
+                // Execute the statement
+                if ($stmt->execute()) {
+                    echo "Data stored successfully!";
+                } else {
+                    echo "Error executing the statement: " . $stmt->error;
+                }
+
+                $stmt->close();
             } else {
-                echo "Error: " . $stmt->error;
+                echo "Error preparing the statement: " . $conn->error;
             }
-
-            $stmt->close();
         } else {
             echo "Error uploading file.";
         }
