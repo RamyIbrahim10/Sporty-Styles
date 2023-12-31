@@ -14,7 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Define variables and initialize them
     $itemName = $itemPrice = $productionDate = $manufacturingLocation = $itemImage = "";
 
+    
     // Check if the form fields are set before accessing them
+    
+    if(isset($_POST['itemImage'])) {
+        $itemName = $_POST['itemImage'];
+    }
+    
     if(isset($_POST['Name'])) {
         $itemName = $_POST['Name'];
     }
@@ -36,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $targetDir = "uploads/"; // Directory where images will be stored
-    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
 
     // Check if file already exists
     if (file_exists($targetFile)) {
