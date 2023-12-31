@@ -15,28 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemName = $itemPrice = $productionDate = $manufacturingLocation = $itemImage = "";
 
     // Check if the form fields are set before accessing them
-    if(isset($_POST['Name'])) {
-        $itemName = $_POST['Name'];
+    if(isset($_POST['itemName'])) {
+        $itemName = $_POST['itemName'];
     }
 
-    if(isset($_POST['Price'])) {
-        $itemPrice = $_POST['Price'];
+    if(isset($_POST['price'])) {
+        $itemPrice = $_POST['price'];
     }
 
-    if(isset($_POST['AfterDiscount'])) {
-        $productionDate = $_POST['AfterDiscount'];
+    if(isset($_POST['productionDate'])) {
+        $productionDate = $_POST['productionDate'];
     }
 
-    if(isset($_POST['PDate'])) {
-        $productionDate = $_POST['PDate'];
-    }
-
-    if(isset($_POST['MadeIn'])) {
-        $manufacturingLocation = $_POST['MadeIn'];
+    if(isset($_POST['manufacturingLocation'])) {
+        $manufacturingLocation = $_POST['manufacturingLocation'];
     }
 
     // Check if file input 'itemImage' exists in the form submission
-    if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    if(isset($_FILES['itemImage']) && $_FILES['itemImage']['error'] === UPLOAD_ERR_OK) {
         $targetDir = "uploads/";
 
         // Create the directory if it doesn't exist
@@ -44,18 +40,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mkdir($targetDir, 0777, true);
         }
 
-        $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+        $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
         $absoluteTargetFile = __DIR__ . '/' . $targetFile; // Use absolute path
 
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $absoluteTargetFile)) {
+        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $absoluteTargetFile)) {
             $itemImage = $targetFile;
 
             // Prepare the SQL statement
-            $stmt = $conn->prepare("INSERT INTO items (image, Name, Price, AfterDiscount, PDate , MadeIn) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
 
             if ($stmt) {
                 // Bind parameters to the prepared statement
-                $stmt->bind_param("ssssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
+                $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
                 // Execute the statement
                 if ($stmt->execute()) {
@@ -72,7 +68,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error uploading file.";
         }
     } else {
-        echo "No file uploaded or an error occurred with the file.";
+        // Check specific errors in $_FILES['itemImage']['error']
+        switch ($_FILES['itemImage']['error']) {
+            case UPLOAD_ERR_INI_SIZE:
+                echo "The uploaded file exceeds the upload_max_filesize directive in php.ini";
+                break;
+            case UPLOAD_ERR_FORM_SIZE:
+                echo "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form";
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                echo "The uploaded file was only partially uploaded";
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                echo "No file was uploaded";
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                echo "Missing a temporary folder";
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                echo "Failed to write file to disk";
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                echo "A PHP extension stopped the file upload";
+                break;
+            default:
+                echo "Unknown error occurred with the file upload";
+                break;
+        }
     }
 
     $conn->close();
