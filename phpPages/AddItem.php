@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // File uploaded successfully, save the file name or path to the database
             $imagePath = $targetFile;
     
-            $sql = "INSERT INTO items ( image_path, item_name, price, after_discount, production_date, manufacturing_location) VALUES ('$imagePath', '$itemName', '$price', '$afterDiscount', '$productionDate', '$manufacturingLocation')";
+            $sql = "INSERT INTO items ( image_path, Name, price, AfterDiscount, PDate, MadeIn) VALUES ('$imagePath', '$itemName', '$price', '$afterDiscount', '$productionDate', '$manufacturingLocation')";
             if ($conn->query($sql) === TRUE) {
                 echo "Image uploaded and saved in the database successfully.";
             } else {
