@@ -31,26 +31,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $manufacturingLocation = $_POST['manufacturingLocation'];
     }
 
-    // Handle file upload
-    $targetDir = "uploads/";
-    $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
+    // Check if file input 'itemImage' exists in the form submission
+    if(isset($_FILES['itemImage']) && $_FILES['itemImage']['error'] === UPLOAD_ERR_OK) {
+        // Handle file upload
+        $targetDir = "uploads/";
+        $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
 
-    if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
-        $itemImage = $targetFile;
+        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
+            $itemImage = $targetFile;
 
-        // Prepare and execute the SQL statement
-        $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
+            // Prepare and execute the SQL statement
+            $stmt = $conn->prepare("INSERT INTO items (item_image, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
-        if ($stmt->execute()) {
-            echo "Data stored successfully!";
+            if ($stmt->execute()) {
+                echo "Data stored successfully!";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error uploading file.";
         }
-
-        $stmt->close();
     } else {
-        echo "Error uploading file.";
+        echo "No file uploaded or an error occurred with the file.";
     }
 
     $conn->close();
