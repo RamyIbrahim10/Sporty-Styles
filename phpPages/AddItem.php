@@ -50,9 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conn->prepare("INSERT INTO items (image_path, item_name, item_price, production_date, manufacturing_location) VALUES (?, ?, ?, ?, ?)");
 
             if ($stmt) {
-                $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
-            
-            if ($stmt) {
                 // Bind parameters to the prepared statement
                 $stmt->bind_param("sssss", $itemImage, $itemName, $itemPrice, $productionDate, $manufacturingLocation);
 
