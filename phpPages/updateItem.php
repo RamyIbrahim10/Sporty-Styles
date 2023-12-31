@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($imagePath)) {
         $sql .= ", image_path='$imagePath'";
     }
-    $sql .= " WHERE ID='$ID'";
+    $sql .= " WHERE ID='$itemId'";
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Item updated successfully.');</script>";
