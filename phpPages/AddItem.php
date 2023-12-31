@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $itemName = $itemPrice = $productionDate = $manufacturingLocation = $itemImage = "";
 
     // Check if the form fields are set before accessing them
-    if(isset($_POST['itemName'])) {
+    if(isset($_POST['Name'])) {
         $itemName = $_POST['Name'];
     }
 
