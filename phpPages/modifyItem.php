@@ -129,6 +129,7 @@
                                 <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
                                 <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
                                 <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+                                <a href=""><p style="text-align:center"><input class="btn btn-warning" type="button" value="Modify"></p></a>
                             </div>
                         </div>
                     </div>
