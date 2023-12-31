@@ -40,14 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['MadeIn'])) {
         $manufacturingLocation = $_POST['MadeIn'];
     }
-
-    $targetDir = "uploads/"; // Directory where images will be stored
-    $targetFile = $targetDir . basename($_FILES["itemImage"]["name"]);
+    // Generate a unique filename
+    $timestamp = time(); // Get current timestamp
+    $uniqueFileName = $timestamp . '_' . basename($_FILES["itemImage"]["name"]);
+    $targetFile = $targetDir . $uniqueFileName;
 
     // Check if file already exists
     if (file_exists($targetFile)) {
-        echo "Sorry, file already exists.";
-    } else {
+        echo "Sorry, a file with the same name already exists.";
+        } else {
         // Try to upload the file
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
             // File uploaded successfully, save the file name or path to the database
