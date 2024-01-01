@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Generate a unique filename
     $targetDir = "uploads/"; // Directory where images will be stored
     $timestamp = time(); // Get current timestamp
-    $uniqueFileName = $timestamp . '_' . basename($_FILES["itemImage"]["name"]);
+    $uniqueFileName = $timestamp . '_' . basename($_FILES["image"]["name"]);
     $targetFile = $targetDir . $uniqueFileName;
 
     // Check if file already exists
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Sorry, a file with the same name already exists.";
         } else {
         // Try to upload the file
-        if (move_uploaded_file($_FILES["itemImage"]["tmp_name"], $targetFile)) {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
             // File uploaded successfully, save the file name or path to the database
             $imagePath = $targetFile;
     
