@@ -71,8 +71,8 @@
         <form>
             <!-- ID input -->
             <div class="mb-3">
-                <label for="itemId" class="form-label">Item ID</label>
-                <input type="text" class="form-control" id="itemId" placeholder="Enter item ID">
+                <label for="delete_id" class="form-label">Item ID</label>
+                <input type="text" class="form-control" id="itemId" value="<?php echo $row['ID']; ?>" placeholder="Enter item ID">
             </div>
 
             <!-- Submit button -->
