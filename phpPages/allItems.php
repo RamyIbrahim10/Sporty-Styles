@@ -45,6 +45,7 @@
         }
         .card-body {
             padding: 1.25rem; /* Adjust the padding within the card body */
+            color: #FFCF01;
         }
         .card-title {
             font-size: 1.25rem; /* Increase the title font size */
@@ -61,6 +62,9 @@
             height: 180px; /* Adjust the image height */
             object-fit: cover; /* Scale the image while preserving aspect ratio */
         }
+        h2 {
+            text-align:center;
+        }   
     </style>
 </head>
 
@@ -97,8 +101,10 @@
     </nav><br><br><br>
 
     <div class="container">
+    <h2>All Items</h2><br><br><br>
     <div class="row">
         <?php
+        // Replace with your database connection details
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -112,35 +118,54 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM items"; // Assuming 'items' is your table name
+        // Fetch items from the database
+        $sql = "SELECT * FROM items";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            // Output data of each row
+        // Display items fetched from the database
+        if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 ?>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="card">
-                        <img src="<?php echo $row['image_path']; ?>" class="card-img-top" alt="Item Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['Name']; ?></h5>
-                            <p class="card-text">Price: <?php echo $row['Price']; ?></p>
-                            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
-                            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
-                            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
-                        </div>
-                    </div>
-                </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center">
+    <div class="card">
+        <?php
+        $imagePath = $row['image_path'];
+        if (file_exists($imagePath) && is_file($imagePath)) {
+            ?>
+            <img src="<?php echo $imagePath; ?>" class="card-img-top" alt="Item Image">
+            <?php
+        } else {
+            ?>
+            <div class="image-not-found">
+                Image not found: <?php echo $imagePath; ?>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $row['Name']; ?></h5>
+            <p class="card-text">ID: <?php echo $row['ID']; ?></p>
+            <p class="card-text">Price: <?php echo $row['Price']; ?></p>
+            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
+            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
+            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+        </div>
+    </div>
+</div>
+
                 <?php
             }
         } else {
             echo "No items found";
         }
 
+        // Close connection
         $conn->close();
         ?>
     </div>
 </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -149,3 +174,4 @@
 </body>
 
 </html>
+
