@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $afterDiscount = $_POST['AfterDiscount'];
     $productionDate = $_POST['PDate'];
     $manufacturingLocation = $_POST['MadeIn'];
+    $theSection = $_POST['type'];
 
     // Check if an image is being updated
     $imagePath = '';
@@ -36,18 +37,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Update data in the database
-    $sql = "UPDATE items SET Name='$itemName', Price='$price', AfterDiscount='$afterDiscount', PDate='$productionDate', MadeIn='$manufacturingLocation'";
-    if (!empty($imagePath)) {
-        $sql .= ", image_path='$imagePath'";
-    }
-    $sql .= " WHERE ID='$itemId'";
+    // Update data in the database using prepared statements
+    $sql = "UPDATE items SET Name=?, Price=?, AfterDiscount=?, PDate=?, MadeIn=?, type=?";
+    $params = array($itemName, $price, $afterDiscount, $productionDate, $manufacturingLocation, $theSection);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Item updated successfully.');</script>";
-        echo "<script>window.location.href = 'allItems.php';</script>";
+    if (!empty($imagePath)) {
+        $sql .= ", image_path=?";
+        $params[] = $imagePath;
+    }
+
+    $sql .= " WHERE ID=?";
+    $params[] = $itemId;
+
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $types = str_repeat('s', count($params)); // Assuming all parameters are strings
+        $stmt->bind_param($types, ...$params);
+        if ($stmt->execute()) {
+            echo "<script>alert('Item updated successfully.');</script>";
+            echo "<script>window.location.href = 'allItems.php';</script>";
+        } else {
+            echo "Error updating item: " . $conn->error;
+        }
+        $stmt->close();
     } else {
-        echo "Error updating item: " . $conn->error;
+        echo "Error preparing statement: " . $conn->error;
     }
 
     $conn->close();

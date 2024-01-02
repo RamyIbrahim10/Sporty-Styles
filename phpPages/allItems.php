@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Fork</title>
+    <title>Sporty Styles</title>
     <style>
         body {
             background: #F2F2F2;
@@ -143,12 +143,13 @@
         }
         ?>
         <div class="card-body">
-            <h5 class="card-title"><?php echo $row['Name']; ?></h5>
+            <h5 style="text-align:center;" class="card-title"><?php echo $row['Name']; ?></h5>
             <p class="card-text">ID: <?php echo $row['ID']; ?></p>
             <p class="card-text">Price: <?php echo $row['Price']; ?></p>
             <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
             <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
             <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+            <p class="card-text">The Section: <?php echo $row['type']; ?></p>
         </div>
     </div>
 </div>

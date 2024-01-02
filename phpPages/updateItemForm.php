@@ -135,6 +135,11 @@
                 <input type="text" class="form-control" id="MadeIn" name="MadeIn" placeholder="Enter manufacturing location">
             </div>
 
+            <div class="mb-3">
+                <label for="type" class="form-label">The Section</label>
+                <input type="text" class="form-control" id="type" name="type" placeholder="Enter The Section">
+            </div>
+
             <!-- Submit button -->
             <div class="mb-3">
                 <input type="submit" class="btn btn-primary" value="Update">
