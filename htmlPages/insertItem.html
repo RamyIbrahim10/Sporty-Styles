@@ -68,7 +68,7 @@
 
     <div class="container mt-4">
         <h2>Insert New Item</h2>
-        <form method="post" action="../phpPages/AddItem.php" enctype="multipart/form-data">
+        <form method="POST" action="../phpPages/AddItem.php" enctype="multipart/form-data">
             <!-- Image input -->
             <div class="mb-3">
                 <label for="image" class="form-label">Item Image</label>
@@ -97,8 +97,7 @@
                 <label for="PDate" class="form-label">Production Date</label>
                 <input type="date" class="form-control" id="PDate" name="PDate">
             </div>
-        
-            <!-- Manufacturing Location input -->
+
             <div class="mb-3">
                 <label for="MadeIn" class="form-label">Manufacturing Location</label>
                 <input type="text" class="form-control" id="MadeIn" name="MadeIn" placeholder="Enter manufacturing location">
