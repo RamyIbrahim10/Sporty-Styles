@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_id'])) {
 
     if ($stmt->execute()) {
         echo "<script>alert('Item deleted successfully.');</script>";
-        echo "<script>window.location.href = 'your_previous_page.php';</script>"; // Redirect to your previous page
+        echo "<script>window.location.href = 'allItems.php';</script>"; // Redirect to your previous page
     } else {
         echo "Error deleting item: " . $conn->error;
     }

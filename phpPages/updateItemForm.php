@@ -142,7 +142,7 @@
 
             <!-- Submit button -->
             <div class="mb-3">
-                <input type="submit" class="btn btn-primary" value="Update">
+                <p style="text-align:center;"><input type="submit" class="btn btn-warning" value="Update"></p>
             </div>
         </form>
     </div>
