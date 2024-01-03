@@ -14,37 +14,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Collect form data
-    $itemName = $_POST['Name'];
-    $price = $_POST['Price'];
-    $afterDiscount = $_POST['AfterDiscount'];
-    $productionDate = $_POST['PDate'];
-    $manufacturingLocation = $_POST['MadeIn'];
-    $theSection = $_POST['type'];
+    // Get item ID from the form
+    $itemID = $_POST['ID'];
 
-    // Check if the file field is set and not empty
-    if (isset($_FILES["image"]) && $_FILES["image"]["error"] === UPLOAD_ERR_OK) {
-        $targetDir = "uploads/";
-        $timestamp = time();
-        $uniqueFileName = $timestamp . '_' . basename($_FILES["image"]["name"]);
-        $targetFile = $targetDir . $uniqueFileName;
+    // Query to fetch item details from the 'items' table based on the provided item ID
+    $sql = "SELECT * FROM items WHERE ID = '$itemID'";
+    $result = $conn->query($sql);
 
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            $imagePath = $targetFile;
+    if ($result->num_rows > 0) {
+        // Fetch item details
+        $row = $result->fetch_assoc();
 
-            $sql = "INSERT INTO basket (image_path, Name, Price, AfterDiscount, PDate, MadeIn, type) VALUES ('$imagePath', '$itemName', '$price', '$afterDiscount', '$productionDate', '$manufacturingLocation', '$theSection')";
+        // Get necessary item details
+        $itemName = $row['Name'];
+        $itemPrice = $row['Price'];
+        $itemDiscount = $row['AfterDiscount'];
+        $itemPDate = $row['PDate'];
+        $itemMadeIn = $row['MadeIn'];
+        $itemType = $row['type'];
+        $itemImagePath = $row['image_path'];
 
-            if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Image uploaded and saved in the database successfully.');</script>";
-                echo "<script>window.location.href = 'allItems.php';</script>";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+        // Insert item into the 'Basket' table
+        $insertSQL = "INSERT INTO Basket (Name, Price, AfterDiscount, PDate, MadeIn, type, image_path) VALUES ('$itemName', '$itemPrice', '$itemDiscount', '$itemPDate', '$itemMadeIn', '$itemType', '$itemImagePath')";
+
+        if ($conn->query($insertSQL) === TRUE) {
+            echo "<script>alert('Item added to the Basket successfully!');</script>";
+            echo "<script>window.location.href = 'Basket.php';</script>"; 
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            echo "Error: " . $insertSQL . "<br>" . $conn->error;
         }
     } else {
-        echo "No file uploaded or an error occurred with the file upload.";
+        echo "<script>alert('No item found with the provided ID');</script>";
     }
 
     $conn->close();

@@ -65,27 +65,6 @@
         h2 {
             text-align:center;
         }   
-        .add-to-basket-form {
-            display: flex;
-            align-items: center;
-        }
-
-        .add-to-basket-form input[type="text"] {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .add-to-basket-form {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .add-to-basket-form input[type="text"] {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-        }
     </style>
 </head>
 
@@ -124,10 +103,43 @@
     <div class="container">
     <h2>Jackets</h2><br><br><br>
     <div class="row">
-    <p class="mb-3">Add items to your basket by entering the item ID:</p>
         <form class="add-to-basket-form" action="../addToBasket.php" method="post">
-            <input type="text" class="form-control" name="itemID" placeholder="Enter Item ID" required>
-            <button type="submit" class="btn btn-primary">Add to Basket</button><br><br><br><br><br><br>
+        <div class="mb-3">
+                <label for="ID" class="form-label">Add items to your basket by entering the item ID:</label>
+                <select class="form-select" id="ID" name="ID">
+                    <?php
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "stylesports";
+                
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
+                
+                    $sql = "SELECT ID FROM items"; // Assuming 'items' is your table name
+                    $result = $conn->query($sql);
+                
+                    if ($result->num_rows > 0) {
+                        // Output data of each row
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row['ID'] . '">' . $row['ID'] . '</option>';
+                        }
+                    } else {
+                        echo '<option value="">No items found</option>';
+                    }
+                
+                    $conn->close();
+                    ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <p style="text-align:center;"><input type="submit" class="btn btn-warning" value="Update"></p>
+            </div>
         </form>
         <?php
         // Replace with your database connection details
@@ -169,6 +181,7 @@
             <?php
         }
         ?>
+        <br><br><br>
         <div class="card-body">
             <h5 style="text-align:center;" class="card-title"><?php echo $row['Name']; ?></h5>
             <p class="card-text">ID: <?php echo $row['ID']; ?></p>

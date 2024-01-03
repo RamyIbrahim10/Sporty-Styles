@@ -108,44 +108,67 @@
     <div class="container">
         <h2>Basket</h2><br><br><br>
         <div class="row">
-            <?php
-            // Replace with your database connection details
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "stylesports";
+        <?php
+        // Replace with your database connection details
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "stylesports";
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-            // Fetch items from the database
-            $sql = "SELECT * FROM items_in_basket"; // Modify this query according to your database structure
-            $result = $conn->query($sql);
+        // Fetch items from the database
+        $sql = "SELECT * FROM basket";
+        $result = $conn->query($sql);
 
-            // Display items fetched from the database
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    ?>
+        // Display items fetched from the database
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
                     <div class="col-lg-3 col-md-4 col-sm-6 d-flex justify-content-center">
-                        <div class="card">
-                            <!-- Card content -->
-                            <!-- ... (Your card content based on fetched data) -->
-                        </div>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "No items found";
-            }
-
-            // Close connection
-            $conn->close();
+    <div class="card">
+        <?php
+        $imagePath = $row['image_path'];
+        if (file_exists($imagePath) && is_file($imagePath)) {
             ?>
+            <img src="<?php echo $imagePath; ?>" class="card-img-top" alt="Item Image">
+            <?php
+        } else {
+            ?>
+            <div class="image-not-found">
+                Image not found: <?php echo $imagePath; ?>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="card-body">
+            <h5 style="text-align:center;" class="card-title"><?php echo $row['Name']; ?></h5>
+            <p class="card-text">ID: <?php echo $row['ID']; ?></p>
+            <p class="card-text">Price: <?php echo $row['Price']; ?></p>
+            <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
+            <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
+            <p class="card-text">Made in: <?php echo $row['MadeIn']; ?></p>
+            <p class="card-text">The Section: <?php echo $row['type']; ?></p>
+        </div>
+    </div>
+</div>
+
+                <?php
+            }
+        } else {
+            echo "No items found";
+        }
+
+        // Close connection
+        $conn->close();
+        ?>
+
         </div>
     </div>
 
