@@ -65,6 +65,27 @@
         h2 {
             text-align:center;
         }   
+        .add-to-basket-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .add-to-basket-form input[type="text"] {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .add-to-basket-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .add-to-basket-form input[type="text"] {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -101,8 +122,13 @@
     </nav><br><br><br>
 
     <div class="container">
-    <h2>All Items</h2><br><br><br>
+    <h2>Jackets</h2><br><br><br>
     <div class="row">
+    <p class="mb-3">Add items to your basket by entering the item ID:</p>
+        <form class="add-to-basket-form" action="addToBasket.php" method="post">
+            <input type="text" class="form-control" name="itemID" placeholder="Enter Item ID" required>
+            <button type="submit" class="btn btn-primary">Add to Basket</button><br><br><br><br><br><br>
+        </form>
         <?php
         // Replace with your database connection details
         $servername = "localhost";
@@ -119,7 +145,8 @@
         }
 
         // Fetch items from the database
-        $sql = "SELECT * FROM items";
+        $sql =" SELECT * FROM items WHERE type = 'Jackets' ";
+
         $result = $conn->query($sql);
 
         // Display items fetched from the database
