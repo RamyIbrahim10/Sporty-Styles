@@ -138,7 +138,7 @@
                 </select>
             </div>
             <div class="mb-3">
-                <p style="text-align:center;"><input type="submit" class="btn btn-warning" value="Update"></p>
+                <p style="text-align:center;"><input type="submit" class="btn btn-warning" value="Add to Basket"></p>
             </div>
         </form>
         <?php

@@ -68,6 +68,36 @@
         h2 {
             text-align:center;
         }   
+        .custom-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Adjust the height as needed */
+    }
+
+    .custom-width {
+        max-width: 800px; /* Adjust the maximum width as needed */
+        width: 100%;
+    }
+
+    .custom-card {
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: #f8f9fa;
+    }
+
+    .custom-card h5 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .custom-card p {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #555;
+    }
     </style>
 </head>
 
@@ -149,7 +179,6 @@
         ?>
         <div class="card-body">
             <h5 style="text-align:center;" class="card-title"><?php echo $row['Name']; ?></h5>
-            <p class="card-text">ID: <?php echo $row['ID']; ?></p>
             <p class="card-text">Price: <?php echo $row['Price']; ?></p>
             <p class="card-text">After Discount: <?php echo $row['AfterDiscount']; ?></p>
             <p class="card-text">P Date: <?php echo $row['PDate']; ?></p>
@@ -164,6 +193,8 @@
         } else {
             echo "No items found";
         }
+        $totalPrice = 0; // Initialize total price
+$totalDiscountedPrice = 0;
 
         // Close connection
         $conn->close();
@@ -171,6 +202,24 @@
 
         </div>
     </div>
+    
+
+    <!-- Display total price and total discounted price -->
+    <div class="custom-center">
+    <div class="custom-width">
+        <div class="custom-card">
+            <h5>Total Prices</h5>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <p>Total Price: <?php echo $totalPrice; ?></p>
+                </div>
+                <div class="col-md-6">
+                    <p>Total Discounted Price: <?php echo $totalDiscountedPrice; ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- Bootstrap JS and other scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
