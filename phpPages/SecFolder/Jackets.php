@@ -125,7 +125,7 @@
     <h2>Jackets</h2><br><br><br>
     <div class="row">
     <p class="mb-3">Add items to your basket by entering the item ID:</p>
-        <form class="add-to-basket-form" action="addToBasket.php" method="post">
+        <form class="add-to-basket-form" action="../addToBasket.php" method="post">
             <input type="text" class="form-control" name="itemID" placeholder="Enter Item ID" required>
             <button type="submit" class="btn btn-primary">Add to Basket</button><br><br><br><br><br><br>
         </form>
